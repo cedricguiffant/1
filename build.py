@@ -6,28 +6,63 @@ import sys
 
 
 def build():
-    """Génère le .exe avec PyInstaller."""
-    # Vérifier que PyInstaller est installé
+    """Génère le .exe avec PyInstaller (mode GUI)."""
     try:
-        import PyInstaller
+        import PyInstaller  # noqa: F401
     except ImportError:
         print("Installation de PyInstaller...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "pyinstaller"])
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", "pyinstaller"]
+        )
 
     cmd = [
         sys.executable, "-m", "PyInstaller",
         "--onefile",                    # Un seul fichier .exe
-        "--console",                    # Application console (pas de fenêtre GUI)
-        "--name", "pc-cleanup",         # Nom de l'exécutable
+        "--windowed",                   # Pas de console (fenêtre GUI uniquement)
+        "--name", "PC-Cleanup",         # Nom de l'exécutable
         "--clean",                      # Nettoyer le cache avant le build
-        "main.py",                      # Point d'entrée
+        "--add-data", "pc_cleanup:pc_cleanup",
+        "main.py",
     ]
 
-    print("Build en cours...")
-    print(f"Commande: {' '.join(cmd)}")
+    print("=" * 50)
+    print("  PC Cleanup Tool — Build GUI .exe")
+    print("=" * 50)
+    print(f"\nCommande: {' '.join(cmd)}\n")
     subprocess.check_call(cmd)
-    print("\nBuild terminé! L'exécutable se trouve dans le dossier dist/")
+    print("\n" + "=" * 50)
+    print("  Build terminé !")
+    print("  → dist/PC-Cleanup.exe")
+    print("=" * 50)
+
+
+def build_cli():
+    """Génère le .exe en mode console (CLI)."""
+    try:
+        import PyInstaller  # noqa: F401
+    except ImportError:
+        print("Installation de PyInstaller...")
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", "pyinstaller"]
+        )
+
+    cmd = [
+        sys.executable, "-m", "PyInstaller",
+        "--onefile",
+        "--console",
+        "--name", "pc-cleanup-cli",
+        "--clean",
+        "--add-data", "pc_cleanup:pc_cleanup",
+        "main.py",
+    ]
+
+    print("Build CLI en cours...")
+    subprocess.check_call(cmd)
+    print("\nBuild terminé → dist/pc-cleanup-cli.exe")
 
 
 if __name__ == "__main__":
-    build()
+    if "--cli" in sys.argv:
+        build_cli()
+    else:
+        build()

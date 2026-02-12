@@ -12,5 +12,8 @@ license = {text = "MIT"}
 [project.scripts]
 pc-cleanup = "pc_cleanup.cli:run"
 
+[project.gui-scripts]
+pc-cleanup-gui = "pc_cleanup.gui:launch_gui"
+
 [tool.setuptools.packages.find]
 include = ["pc_cleanup*"]

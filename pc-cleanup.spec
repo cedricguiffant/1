@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-# Fichier de spec PyInstaller pour PC Cleanup Tool
+# Fichier de spec PyInstaller pour PC Cleanup Tool (GUI)
 # Usage: pyinstaller pc-cleanup.spec
 
 a = Analysis(
@@ -10,6 +10,7 @@ a = Analysis(
     hiddenimports=[
         'pc_cleanup',
         'pc_cleanup.cli',
+        'pc_cleanup.gui',
         'pc_cleanup.modules',
         'pc_cleanup.modules.software_scanner',
         'pc_cleanup.modules.disk_analyzer',
@@ -31,10 +32,10 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='pc-cleanup',
+    name='PC-Cleanup',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,
+    console=False,  # Mode fenêtré (pas de console)
 )

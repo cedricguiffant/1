@@ -1,6 +1,6 @@
 # PC Cleanup Tool
 
-Outil en ligne de commande pour trier, organiser et nettoyer son PC. Fonctionne sur **Windows**, **Linux** et **macOS**.
+Outil de tri, organisation et nettoyage de PC avec **interface graphique moderne**. Fonctionne sur **Windows**, **Linux** et **macOS**.
 
 ## Fonctionnalités
 
@@ -28,14 +28,15 @@ pip install .
 ## Utilisation
 
 ```bash
-# Méthode 1 : script direct
+# Interface graphique (par défaut)
 python main.py
 
-# Méthode 2 : module Python
-python -m pc_cleanup
+# Mode ligne de commande
+python main.py --cli
 
-# Méthode 3 : après installation
-pc-cleanup
+# Via module Python
+python -m pc_cleanup          # GUI
+python -m pc_cleanup --cli    # CLI
 ```
 
 ## Structure du projet
@@ -45,6 +46,7 @@ pc_cleanup/
 ├── __init__.py              # Package principal
 ├── __main__.py              # Exécution via python -m
 ├── cli.py                   # Interface CLI interactive
+├── gui.py                   # Interface graphique (tkinter)
 └── modules/
     ├── __init__.py
     ├── software_scanner.py  # Scan et désinstallation de logiciels
@@ -56,20 +58,19 @@ pc_cleanup/
 ## Créer un exécutable (.exe)
 
 ```bash
-# Installer PyInstaller
 pip install pyinstaller
 
-# Méthode 1 : script de build automatique
+# Build GUI (recommandé) — génère dist/PC-Cleanup.exe
 python build.py
 
-# Méthode 2 : commande directe
-pyinstaller --onefile --console --name pc-cleanup main.py
+# Build CLI uniquement — génère dist/pc-cleanup-cli.exe
+python build.py --cli
 
-# Méthode 3 : via le fichier .spec (configuration avancée)
+# Ou via le fichier .spec
 pyinstaller pc-cleanup.spec
 ```
 
-L'exécutable sera généré dans le dossier `dist/pc-cleanup.exe`. Vous pouvez le distribuer tel quel, aucune installation de Python n'est requise sur la machine cible.
+L'exécutable est autonome : aucune installation de Python n'est requise sur la machine cible.
 
 ## Compatibilité
 
