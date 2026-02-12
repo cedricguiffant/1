@@ -53,6 +53,24 @@ pc_cleanup/
     └── file_organizer.py    # Organisation des fichiers par catégorie/date
 ```
 
+## Créer un exécutable (.exe)
+
+```bash
+# Installer PyInstaller
+pip install pyinstaller
+
+# Méthode 1 : script de build automatique
+python build.py
+
+# Méthode 2 : commande directe
+pyinstaller --onefile --console --name pc-cleanup main.py
+
+# Méthode 3 : via le fichier .spec (configuration avancée)
+pyinstaller pc-cleanup.spec
+```
+
+L'exécutable sera généré dans le dossier `dist/pc-cleanup.exe`. Vous pouvez le distribuer tel quel, aucune installation de Python n'est requise sur la machine cible.
+
 ## Compatibilité
 
 - **Windows** : Lecture du registre, gestionnaire de paquets natif
