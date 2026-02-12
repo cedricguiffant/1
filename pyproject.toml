@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "pc-cleanup-tool"
+version = "1.0.0"
+description = "Outil de tri, organisation et nettoyage de PC"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+
+[project.scripts]
+pc-cleanup = "pc_cleanup.cli:run"
+
+[tool.setuptools.packages.find]
+include = ["pc_cleanup*"]
